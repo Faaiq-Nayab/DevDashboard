@@ -105,7 +105,7 @@ const Dashboard = () => {
         {/* Greeting */}
         <div className="mb-4">
           <span className="text-2xl font-bold select-none">
-            Hi Faaiq 🖐️
+            Welcome back 🖐️
           </span>
 
           <span className="block pt-1 text-sm text-gray-500 select-none">
