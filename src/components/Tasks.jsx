@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Plus,
   CheckCircle2,
@@ -8,35 +8,49 @@ import {
 } from "lucide-react";
 
 const Tasks = () => {
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      title: "Finish dashboard UI",
-      project: "DevDashboard",
-      priority: "High",
-      status: "In Progress",
-      due: "Today",
-      completed: false,
-    },
-    {
-      id: 2,
-      title: "Create Projects page",
-      project: "DevDashboard",
-      priority: "Medium",
-      status: "In Progress",
-      due: "Tomorrow",
-      completed: false,
-    },
-    {
-      id: 3,
-      title: "Fix mobile sidebar",
-      project: "DevDashboard",
-      priority: "High",
-      status: "Completed",
-      due: "Aug 12",
-      completed: true,
-    },
-  ]);
+  // Load tasks from localStorage when the component starts
+  const [tasks, setTasks] = useState(() => {
+    const savedTasks = localStorage.getItem("devdashboard-tasks");
+
+    if (savedTasks) {
+      return JSON.parse(savedTasks);
+    }
+
+    return [
+      {
+        id: 1,
+        title: "Finish dashboard UI",
+        project: "DevDashboard",
+        priority: "High",
+        status: "In Progress",
+        due: "Today",
+        completed: false,
+      },
+      {
+        id: 2,
+        title: "Create Projects page",
+        project: "DevDashboard",
+        priority: "Medium",
+        status: "In Progress",
+        due: "Tomorrow",
+        completed: false,
+      },
+      {
+        id: 3,
+        title: "Fix mobile sidebar",
+        project: "DevDashboard",
+        priority: "High",
+        status: "Completed",
+        due: "Aug 12",
+        completed: true,
+      },
+    ];
+  });
+
+  // Save tasks to localStorage whenever tasks change
+  useEffect(() => {
+    localStorage.setItem("devdashboard-tasks", JSON.stringify(tasks));
+  }, [tasks]);
 
   const [newTask, setNewTask] = useState("");
   const [filter, setFilter] = useState("all");
@@ -70,10 +84,10 @@ const Tasks = () => {
       prev.map((task) =>
         task.id === id
           ? {
-            ...task,
-            completed: !task.completed,
-            status: !task.completed ? "Completed" : "Todo",
-          }
+              ...task,
+              completed: !task.completed,
+              status: !task.completed ? "Completed" : "Todo",
+            }
           : task
       )
     );
@@ -101,20 +115,20 @@ const Tasks = () => {
   return (
     <div
       className="
-    bg-slate-100
-    p-4
-    sm:p-6
-    md:py-8
-    md:pl-2
-    md:pr-8
+        bg-slate-100
+        p-4
+        sm:p-6
+        md:py-8
+        md:pl-2
+        md:pr-8
 
-    md:fixed
-    md:inset-x-0
-    md:top-16
-    md:bottom-0
-    md:left-72
-    md:overflow-hidden
-  "
+        md:fixed
+        md:inset-x-0
+        md:top-16
+        md:bottom-0
+        md:left-72
+        md:overflow-hidden
+      "
     >
       <div
         className="
@@ -126,7 +140,6 @@ const Tasks = () => {
           md:overflow-hidden
         "
       >
-
         {/* Header */}
         <div className="shrink-0">
           <h1 className="text-2xl font-bold text-slate-900">
@@ -167,7 +180,6 @@ const Tasks = () => {
 
         {/* Stats */}
         <div className="mt-5 grid shrink-0 grid-cols-1 gap-3 sm:mt-7 sm:grid-cols-3 sm:gap-4">
-
           {/* Total */}
           <div className="rounded-xl border border-slate-200 bg-white p-4 sm:p-5">
             <div className="flex items-center justify-between">
@@ -242,46 +254,45 @@ const Tasks = () => {
             md:flex-1
           "
         >
-
           {/* Task Header */}
           <div className="flex shrink-0 flex-col gap-3 border-b border-slate-200 p-4 sm:flex-row sm:items-center sm:justify-between">
-
             <h2 className="font-semibold text-slate-900">
               My Tasks
             </h2>
 
             <div className="flex gap-1 sm:gap-2">
-
               <button
                 onClick={() => setFilter("all")}
-                className={`rounded-lg px-3 py-2 text-sm font-medium ${filter === "all"
-                  ? "bg-blue-50 text-blue-600"
-                  : "text-slate-500 hover:bg-slate-50"
-                  }`}
+                className={`rounded-lg px-3 py-2 text-sm font-medium ${
+                  filter === "all"
+                    ? "bg-blue-50 text-blue-600"
+                    : "text-slate-500 hover:bg-slate-50"
+                }`}
               >
                 All
               </button>
 
               <button
                 onClick={() => setFilter("active")}
-                className={`rounded-lg px-3 py-2 text-sm font-medium ${filter === "active"
-                  ? "bg-blue-50 text-blue-600"
-                  : "text-slate-500 hover:bg-slate-50"
-                  }`}
+                className={`rounded-lg px-3 py-2 text-sm font-medium ${
+                  filter === "active"
+                    ? "bg-blue-50 text-blue-600"
+                    : "text-slate-500 hover:bg-slate-50"
+                }`}
               >
                 Active
               </button>
 
               <button
                 onClick={() => setFilter("completed")}
-                className={`rounded-lg px-3 py-2 text-sm font-medium ${filter === "completed"
-                  ? "bg-blue-50 text-blue-600"
-                  : "text-slate-500 hover:bg-slate-50"
-                  }`}
+                className={`rounded-lg px-3 py-2 text-sm font-medium ${
+                  filter === "completed"
+                    ? "bg-blue-50 text-blue-600"
+                    : "text-slate-500 hover:bg-slate-50"
+                }`}
               >
                 Completed
               </button>
-
             </div>
           </div>
 
@@ -299,7 +310,6 @@ const Tasks = () => {
               WebkitOverflowScrolling: "touch",
             }}
           >
-
             {filteredTasks.length === 0 ? (
               <div className="p-10 text-center">
                 <p className="text-sm text-slate-400">
@@ -312,7 +322,6 @@ const Tasks = () => {
                   key={task.id}
                   className="flex items-center gap-3 px-4 py-4 transition hover:bg-slate-50 sm:gap-4 sm:px-5"
                 >
-
                   {/* Complete */}
                   <button
                     onClick={() => toggleTask(task.id)}
@@ -333,12 +342,12 @@ const Tasks = () => {
 
                   {/* Task Info */}
                   <div className="min-w-0 flex-1">
-
                     <h3
-                      className={`truncate text-sm font-medium ${task.completed
-                        ? "text-slate-400 line-through"
-                        : "text-slate-800"
-                        }`}
+                      className={`truncate text-sm font-medium ${
+                        task.completed
+                          ? "text-slate-400 line-through"
+                          : "text-slate-800"
+                      }`}
                     >
                       {task.title}
                     </h3>
@@ -346,27 +355,28 @@ const Tasks = () => {
                     <p className="mt-1 text-xs text-slate-400">
                       {task.project}
                     </p>
-
                   </div>
 
                   {/* Priority */}
                   <span
-                    className={`hidden rounded-full px-2.5 py-1 text-xs font-medium sm:inline-block ${task.priority === "High"
-                      ? "bg-red-50 text-red-600"
-                      : task.priority === "Medium"
+                    className={`hidden rounded-full px-2.5 py-1 text-xs font-medium sm:inline-block ${
+                      task.priority === "High"
+                        ? "bg-red-50 text-red-600"
+                        : task.priority === "Medium"
                         ? "bg-yellow-50 text-yellow-600"
                         : "bg-green-50 text-green-600"
-                      }`}
+                    }`}
                   >
                     {task.priority}
                   </span>
 
                   {/* Status */}
                   <span
-                    className={`hidden rounded-full px-2.5 py-1 text-xs font-medium md:inline-block ${task.completed
-                      ? "bg-green-50 text-green-600"
-                      : "bg-blue-50 text-blue-600"
-                      }`}
+                    className={`hidden rounded-full px-2.5 py-1 text-xs font-medium md:inline-block ${
+                      task.completed
+                        ? "bg-green-50 text-green-600"
+                        : "bg-blue-50 text-blue-600"
+                    }`}
                   >
                     {task.status}
                   </span>
@@ -379,14 +389,11 @@ const Tasks = () => {
                   >
                     <Trash2 size={17} />
                   </button>
-
                 </div>
               ))
             )}
-
           </div>
         </div>
-
       </div>
     </div>
   );
