@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Plus } from "lucide-react";
 
 const Projects = () => {
   const [projects, setProjects] = useState(() => {
@@ -74,20 +75,19 @@ const Projects = () => {
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-gray-800 select-none">
-            Projects
-          </h1>
-
-          <p className="text-gray-500 mt-1 select-none">
+          <p className="text-bold text-lg md:text-xl sm:text-lg select-none">
             Manage and track your development projects.
           </p>
         </div>
 
         <button
           onClick={() => setShowModal(true)}
-          className="bg-blue-600 text-white px-5 py-2.5 rounded-lg hover:bg-blue-700 transition cursor-pointer select-none"
+          className="bg-blue-600 text-white px-3 py-3 sm:px-4 sm:py-2 md:px-1 md:py-1 flex items-center rounded-lg hover:bg-blue-700 transition cursor-pointer select-none"
         >
-          + Add Project
+          <Plus size={18} />
+           <span className="hidden sm:inline">
+              Add Task
+            </span>
         </button>
       </div>
 

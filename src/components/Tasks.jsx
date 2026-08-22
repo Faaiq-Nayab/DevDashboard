@@ -141,11 +141,7 @@ const Tasks = () => {
       >
         {/* Header */}
         <div className="shrink-0">
-          <h1 className="text-2xl font-bold text-slate-900">
-            Tasks
-          </h1>
-
-          <p className="mt-1 text-sm text-slate-500">
+          <p className="text-bold text-lg md:text-xl sm:text-lg select-none">
             Manage and keep track of your tasks.
           </p>
         </div>

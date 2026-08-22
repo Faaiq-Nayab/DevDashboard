@@ -42,11 +42,7 @@ const Analytics = () => {
         <div className="p-4 space-y-4">
             {/* Page Header */}
             <div>
-                <h1 className="text-2xl font-semibold text-slate-800">
-                    Analytics
-                </h1>
-
-                <p className="text-sm text-slate-500 mt-0.5">
+                <p className="text-bold text-lg md:text-xl sm:text-lg select-none">
                     Track your development progress and productivity.
                 </p>
             </div>

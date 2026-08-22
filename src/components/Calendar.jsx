@@ -102,10 +102,7 @@ const Calendar = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-4 sm:mb-6">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">
-            Calendar
-          </h2>
-          <p className="text-sm text-gray-500 mt-1">
+          <p className="text-bold text-lg md:text-xl sm:text-lg select-none">
             Plan your coding sessions, deadlines and tasks.
           </p>
         </div>

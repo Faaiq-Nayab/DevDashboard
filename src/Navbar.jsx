@@ -2,8 +2,20 @@ import React from 'react'
 import Searchbar from "./components/Searchbar";
 import { Menu, X } from "lucide-react";
 import { FaBell } from "react-icons/fa6";
+import { useLocation } from "react-router-dom";
 
 const Navbar = ({ mobileMenuIsOpen, setMobileMenuIsOpen }) => {
+   const location = useLocation();
+  const pageNames = {
+    "/": "Overview",
+    "/projects": "Projects",
+    "/tasks": "Tasks",
+    "/analytics": "Analytics",
+    "/calendar": "Calendar",
+    "/settings": "Settings",
+  };
+  const pageName = pageNames[location.pathname] || "Overview";
+  
   return (
     <div className="sticky top-0 z-50">
       <header className="w-full h-15 bg-white/90 backdrop-blur-sm shadow-md px-4 mx-[1px] md:px-8 flex items-center justify-between border-b border-slate-200">
@@ -20,7 +32,7 @@ const Navbar = ({ mobileMenuIsOpen, setMobileMenuIsOpen }) => {
           </button>
 
           <h3 className="text-xl md:text-2xl font-bold text-gray-800 select-none">
-            Overview
+            {pageName}
           </h3>
         </div>
 
