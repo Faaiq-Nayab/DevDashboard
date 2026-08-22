@@ -8,7 +8,6 @@ import {
 } from "lucide-react";
 
 const Tasks = () => {
-  // Load tasks from localStorage when the component starts
   const [tasks, setTasks] = useState(() => {
     const savedTasks = localStorage.getItem("devdashboard-tasks");
 
