@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import StatsCard from "./components/StatsCard";
 import { FaCode, FaClock, FaArrowTrendUp } from "react-icons/fa6";
 import { IoCheckmarkCircle } from "react-icons/io5";
@@ -11,93 +11,90 @@ import {
   ArrowRight,
 } from "lucide-react";
 
-
-// =========================
-// Stats
-// =========================
-
-const cards = [
-  {
-    title: "Projects",
-    value: "6",
-    subtitle: "Active projects",
-    icon: <FaCode className="text-blue-500 text-2xl" />,
-    iconBg: "bg-blue-100",
-  },
-  {
-    title: "Tasks Done",
-    value: "24",
-    subtitle: "This week",
-    icon: <IoCheckmarkCircle className="text-green-500 text-2xl" />,
-    iconBg: "bg-green-100",
-  },
-  {
-    title: "Hours Coded",
-    value: "18.5",
-    subtitle: "This week",
-    icon: <FaClock className="text-purple-500 text-2xl" />,
-    iconBg: "bg-purple-100",
-  },
-  {
-    title: "Tasks Pending",
-    value: "8",
-    subtitle: "To complete",
-    icon: <FaArrowTrendUp className="text-yellow-500 text-2xl" />,
-    iconBg: "bg-yellow-100",
-  },
-];
-
-
-// =========================
-// Recent Projects
-// =========================
-
-const projects = [
-  {
-    name: "Developer Dashboard",
-    description: "Personal dashboard to track my progress",
-    time: "2h ago",
-    icon: Code2,
-    iconBg: "bg-slate-900",
-  },
-  {
-    name: "Portfolio Website",
-    description: "My personal portfolio built with React",
-    time: "1d ago",
-    icon: Globe,
-    iconBg: "bg-blue-500",
-  },
-  {
-    name: "Task Manager App",
-    description: "A simple to-do app with charts",
-    time: "3d ago",
-    icon: CheckSquare,
-    iconBg: "bg-green-500",
-  },
-];
-
-
-// =========================
-// Upcoming Tasks
-// =========================
-
-const tasks = [
-  {
-    title: "Finish Projects page",
-    due: "Today",
-  },
-  {
-    title: "Add task filtering",
-    due: "Tomorrow",
-  },
-  {
-    title: "Build Analytics page",
-    due: "Friday",
-  },
-];
-
-
 const Dashboard = () => {
+  // =========================
+  // Load Tasks & Projects
+  // =========================
+
+  const [tasks, setTasks] = useState([]);
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    const savedTasks = localStorage.getItem("devdashboard-tasks");
+    const savedProjects = localStorage.getItem("devdashboard-projects");
+
+    if (savedTasks) {
+      setTasks(JSON.parse(savedTasks));
+    }
+
+    if (savedProjects) {
+      setProjects(JSON.parse(savedProjects));
+    }
+  }, []);
+
+  // =========================
+  // Task Stats
+  // =========================
+
+  const completedTasks = tasks.filter(
+    (task) => task.completed
+  ).length;
+
+  const pendingTasks = tasks.filter(
+    (task) => !task.completed
+  ).length;
+
+  // =========================
+  // Stats Cards
+  // =========================
+
+  const cards = [
+    {
+      title: "Projects",
+      value: projects.length,
+      subtitle: "Active projects",
+      icon: <FaCode className="text-blue-500 text-2xl" />,
+      iconBg: "bg-blue-100",
+    },
+    {
+      title: "Tasks Done",
+      value: completedTasks,
+      subtitle: "Completed tasks",
+      icon: (
+        <IoCheckmarkCircle className="text-green-500 text-2xl" />
+      ),
+      iconBg: "bg-green-100",
+    },
+    {
+      title: "Hours Coded",
+      value: "18.5",
+      subtitle: "This week",
+      icon: <FaClock className="text-purple-500 text-2xl" />,
+      iconBg: "bg-purple-100",
+    },
+    {
+      title: "Tasks Pending",
+      value: pendingTasks,
+      subtitle: "To complete",
+      icon: <FaArrowTrendUp className="text-yellow-500 text-2xl" />,
+      iconBg: "bg-yellow-100",
+    },
+  ];
+
+  // =========================
+  // Recent Projects
+  // =========================
+
+  const recentProjects = projects.slice(-3).reverse();
+
+  // =========================
+  // Upcoming Tasks
+  // =========================
+
+  const upcomingTasks = tasks
+    .filter((task) => !task.completed)
+    .slice(0, 3);
+
   return (
     <div className="h-full overflow-hidden bg-gray-100">
       <div className="h-full overflow-hidden p-4">
@@ -112,7 +109,6 @@ const Dashboard = () => {
             Here's what's happening with your projects today.
           </span>
         </div>
-
 
         {/* =========================
             Stats Cards
@@ -130,7 +126,6 @@ const Dashboard = () => {
             />
           ))}
         </div>
-
 
         {/* =========================
             Bottom Section
@@ -150,48 +145,46 @@ const Dashboard = () => {
 
             <div className="mt-4 space-y-4">
 
-              {projects.map((project) => {
-                const Icon = project.icon;
-
-                return (
+              {recentProjects.length === 0 ? (
+                <p className="py-4 text-sm text-slate-400">
+                  No projects yet.
+                </p>
+              ) : (
+                recentProjects.map((project) => (
                   <div
-                    key={project.name}
+                    key={project.id}
                     className="flex items-center gap-4"
                   >
 
                     {/* Icon */}
-                    <div
-                      className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-white ${project.iconBg}`}
-                    >
-                      <Icon size={20} />
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-500 text-white">
+                      <Code2 size={20} />
                     </div>
-
 
                     {/* Project Info */}
                     <div className="min-w-0 flex-1">
 
-                      <h3 className="text-sm font-semibold text-slate-900">
+                      <h3 className="truncate text-sm font-semibold text-slate-900">
                         {project.name}
                       </h3>
 
-                      <p className="mt-1 text-sm text-slate-500">
-                        {project.description}
+                      <p className="mt-1 truncate text-sm text-slate-500">
+                        {project.description ||
+                          "No description provided."}
                       </p>
 
                     </div>
 
-
-                    {/* Time */}
-                    <span className="self-start text-sm text-slate-500">
-                      {project.time}
+                    {/* Status */}
+                    <span className="hidden shrink-0 rounded-full bg-blue-50 px-2.5 py-1 text-xs font-medium text-blue-600 sm:inline-block">
+                      {project.status}
                     </span>
 
                   </div>
-                );
-              })}
+                ))
+              )}
 
             </div>
-
 
             {/* View All */}
             <Link
@@ -203,7 +196,6 @@ const Dashboard = () => {
             </Link>
 
           </div>
-
 
           {/* =========================
               Upcoming Tasks
@@ -217,39 +209,56 @@ const Dashboard = () => {
 
             <div className="mt-4 space-y-4">
 
-              {tasks.map((task, index) => (
-                <div
-                  key={index}
-                  className="flex items-center gap-4"
-                >
+              {upcomingTasks.length === 0 ? (
+                <p className="py-4 text-sm text-slate-400">
+                  No pending tasks.
+                </p>
+              ) : (
+                upcomingTasks.map((task) => (
+                  <div
+                    key={task.id}
+                    className="flex items-center gap-4"
+                  >
 
-                  {/* Task Icon */}
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-50">
-                    <CheckSquare
-                      size={20}
-                      className="text-blue-500"
-                    />
+                    {/* Task Icon */}
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-50">
+                      <CheckSquare
+                        size={20}
+                        className="text-blue-500"
+                      />
+                    </div>
+
+                    {/* Task Info */}
+                    <div className="min-w-0 flex-1">
+
+                      <h3 className="truncate text-sm font-semibold text-slate-900">
+                        {task.title}
+                      </h3>
+
+                      <p className="mt-1 text-sm text-slate-500">
+                        Due: {task.due}
+                      </p>
+
+                    </div>
+
+                    {/* Priority */}
+                    <span
+                      className={`hidden shrink-0 rounded-full px-2.5 py-1 text-xs font-medium sm:inline-block ${
+                        task.priority === "High"
+                          ? "bg-red-50 text-red-600"
+                          : task.priority === "Medium"
+                            ? "bg-yellow-50 text-yellow-600"
+                            : "bg-green-50 text-green-600"
+                      }`}
+                    >
+                      {task.priority}
+                    </span>
+
                   </div>
-
-
-                  {/* Task Info */}
-                  <div className="min-w-0 flex-1">
-
-                    <h3 className="text-sm font-semibold text-slate-900">
-                      {task.title}
-                    </h3>
-
-                    <p className="mt-1 text-sm text-slate-500">
-                      {task.due}
-                    </p>
-
-                  </div>
-
-                </div>
-              ))}
+                ))
+              )}
 
             </div>
-
 
             {/* View All */}
             <Link
@@ -265,7 +274,6 @@ const Dashboard = () => {
         </div>
 
       </div>
-
     </div>
   );
 };
