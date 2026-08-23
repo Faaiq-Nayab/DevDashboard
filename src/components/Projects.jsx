@@ -19,10 +19,7 @@ const Projects = () => {
   });
 
   useEffect(() => {
-    localStorage.setItem(
-      "devdashboard-projects",
-      JSON.stringify(projects)
-    );
+    localStorage.setItem("devdashboard-projects", JSON.stringify(projects));
   }, [projects]);
 
   const handleChange = (e) => {
@@ -66,7 +63,7 @@ const Projects = () => {
 
   const deleteProject = (id) => {
     setProjects((prevProjects) =>
-      prevProjects.filter((project) => project.id !== id)
+      prevProjects.filter((project) => project.id !== id),
     );
   };
 
@@ -85,9 +82,7 @@ const Projects = () => {
           className="bg-blue-600 text-white px-3 py-3 sm:px-4 sm:py-2 md:px-1 md:py-1 flex items-center rounded-lg hover:bg-blue-700 transition cursor-pointer select-none"
         >
           <Plus size={18} />
-           <span className="hidden sm:inline">
-              Add Task
-            </span>
+          <span className="hidden sm:inline">Add Task</span>
         </button>
       </div>
 
@@ -128,8 +123,8 @@ const Projects = () => {
                     project.status === "Completed"
                       ? "bg-green-100 text-green-700"
                       : project.status === "In Progress"
-                      ? "bg-blue-100 text-blue-700"
-                      : "bg-yellow-100 text-yellow-700"
+                        ? "bg-blue-100 text-blue-700"
+                        : "bg-yellow-100 text-yellow-700"
                   }`}
                 >
                   {project.status}

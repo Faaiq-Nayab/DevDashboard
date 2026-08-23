@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Plus,
-  CheckCircle2,
-  Circle,
-  Clock3,
-  Trash2,
-} from "lucide-react";
+import { Plus, CheckCircle2, Circle, Clock3, Trash2 } from "lucide-react";
 
 const Tasks = () => {
   const [tasks, setTasks] = useState(() => {
@@ -87,8 +81,8 @@ const Tasks = () => {
               completed: !task.completed,
               status: !task.completed ? "Completed" : "Todo",
             }
-          : task
-      )
+          : task,
+      ),
     );
   };
 
@@ -103,13 +97,9 @@ const Tasks = () => {
   // Stats
   const totalTasks = tasks.length;
 
-  const completedTasks = tasks.filter(
-    (task) => task.completed
-  ).length;
+  const completedTasks = tasks.filter((task) => task.completed).length;
 
-  const activeTasks = tasks.filter(
-    (task) => !task.completed
-  ).length;
+  const activeTasks = tasks.filter((task) => !task.completed).length;
 
   return (
     <div
@@ -167,9 +157,7 @@ const Tasks = () => {
           >
             <Plus size={18} />
 
-            <span className="hidden sm:inline">
-              Add Task
-            </span>
+            <span className="hidden sm:inline">Add Task</span>
           </button>
         </div>
 
@@ -178,14 +166,9 @@ const Tasks = () => {
           {/* Total */}
           <div className="rounded-xl border border-slate-200 bg-white p-4 sm:p-5">
             <div className="flex items-center justify-between">
-              <p className="text-sm text-slate-500">
-                Total Tasks
-              </p>
+              <p className="text-sm text-slate-500">Total Tasks</p>
 
-              <Circle
-                size={19}
-                className="text-slate-400"
-              />
+              <Circle size={19} className="text-slate-400" />
             </div>
 
             <p className="mt-2 text-2xl font-semibold text-slate-900">
@@ -196,14 +179,9 @@ const Tasks = () => {
           {/* Completed */}
           <div className="rounded-xl border border-slate-200 bg-white p-4 sm:p-5">
             <div className="flex items-center justify-between">
-              <p className="text-sm text-slate-500">
-                Completed
-              </p>
+              <p className="text-sm text-slate-500">Completed</p>
 
-              <CheckCircle2
-                size={19}
-                className="text-green-500"
-              />
+              <CheckCircle2 size={19} className="text-green-500" />
             </div>
 
             <p className="mt-2 text-2xl font-semibold text-slate-900">
@@ -214,14 +192,9 @@ const Tasks = () => {
           {/* Active */}
           <div className="rounded-xl border border-slate-200 bg-white p-4 sm:p-5">
             <div className="flex items-center justify-between">
-              <p className="text-sm text-slate-500">
-                Active
-              </p>
+              <p className="text-sm text-slate-500">Active</p>
 
-              <Clock3
-                size={19}
-                className="text-blue-500"
-              />
+              <Clock3 size={19} className="text-blue-500" />
             </div>
 
             <p className="mt-2 text-2xl font-semibold text-slate-900">
@@ -251,9 +224,7 @@ const Tasks = () => {
         >
           {/* Task Header */}
           <div className="flex shrink-0 flex-col gap-3 border-b border-slate-200 p-4 sm:flex-row sm:items-center sm:justify-between">
-            <h2 className="font-semibold text-slate-900">
-              My Tasks
-            </h2>
+            <h2 className="font-semibold text-slate-900">My Tasks</h2>
 
             <div className="flex gap-1 sm:gap-2">
               <button
@@ -307,9 +278,7 @@ const Tasks = () => {
           >
             {filteredTasks.length === 0 ? (
               <div className="p-10 text-center">
-                <p className="text-sm text-slate-400">
-                  No tasks here.
-                </p>
+                <p className="text-sm text-slate-400">No tasks here.</p>
               </div>
             ) : (
               filteredTasks.map((task) => (
@@ -323,10 +292,7 @@ const Tasks = () => {
                     className="shrink-0"
                   >
                     {task.completed ? (
-                      <CheckCircle2
-                        size={21}
-                        className="text-green-500"
-                      />
+                      <CheckCircle2 size={21} className="text-green-500" />
                     ) : (
                       <Circle
                         size={21}
@@ -358,8 +324,8 @@ const Tasks = () => {
                       task.priority === "High"
                         ? "bg-red-50 text-red-600"
                         : task.priority === "Medium"
-                        ? "bg-yellow-50 text-yellow-600"
-                        : "bg-green-50 text-green-600"
+                          ? "bg-yellow-50 text-yellow-600"
+                          : "bg-green-50 text-green-600"
                     }`}
                   >
                     {task.priority}
