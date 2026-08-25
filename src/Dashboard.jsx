@@ -193,10 +193,6 @@ const Dashboard = () => {
                       <h3 className="truncate text-sm font-semibold text-slate-900">
                         {task.title}
                       </h3>
-
-                      <p className="mt-1 text-sm text-slate-500">
-                        Due: {task.due}
-                      </p>
                     </div>
 
                     {/* Priority */}

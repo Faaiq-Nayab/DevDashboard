@@ -58,7 +58,7 @@ const Sidebar = ({ mobileMenuIsOpen, setMobileMenuIsOpen }) => {
     <div>
       {/* Desktop Sidebar */}
 
-      <aside className="hidden md:flex flex-col w-72 h-full shrink-0 bg-white border-r border-slate-200">
+      <aside className="hidden md:flex flex-col w-72 h-full shrink-0 bg-white border-r border-slate-200 shadow-lg">
         {/* Logo */}
 
         <div className="flex items-center h-15 px-2.5 shadow-sm">

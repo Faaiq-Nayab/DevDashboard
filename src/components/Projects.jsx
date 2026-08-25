@@ -79,7 +79,7 @@ const Projects = () => {
 
         <button
           onClick={() => setShowModal(true)}
-          className="bg-blue-600 text-white px-3 py-3 sm:px-4 sm:py-2 md:px-1 md:py-1 flex items-center rounded-lg hover:bg-blue-700 transition cursor-pointer select-none"
+          className="bg-blue-600 text-white px-3 py-3 sm:px-4 sm:py-2 md:px-2 md:py-2 flex items-center rounded-lg hover:bg-blue-700 transition cursor-pointer select-none"
         >
           <Plus size={18} />
           <span className="hidden sm:inline">Add Project</span>

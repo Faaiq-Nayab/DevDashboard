@@ -13,28 +13,22 @@ const Tasks = () => {
       {
         id: 1,
         title: "Finish dashboard UI",
-        project: "DevDashboard",
         priority: "High",
         status: "In Progress",
-        due: "Today",
         completed: false,
       },
       {
         id: 2,
         title: "Create Projects page",
-        project: "DevDashboard",
         priority: "Medium",
         status: "In Progress",
-        due: "Tomorrow",
         completed: false,
       },
       {
         id: 3,
         title: "Fix mobile sidebar",
-        project: "DevDashboard",
         priority: "High",
         status: "Completed",
-        due: "Aug 12",
         completed: true,
       },
     ];
@@ -58,7 +52,6 @@ const Tasks = () => {
       project: "DevDashboard",
       priority: "Medium",
       status: "Todo",
-      due: "No due date",
       completed: false,
     };
 
@@ -312,10 +305,6 @@ const Tasks = () => {
                     >
                       {task.title}
                     </h3>
-
-                    <p className="mt-1 text-xs text-slate-400">
-                      {task.project}
-                    </p>
                   </div>
 
                   {/* Priority */}
