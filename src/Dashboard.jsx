@@ -4,12 +4,7 @@ import { FaCode, FaClock, FaArrowTrendUp } from "react-icons/fa6";
 import { IoCheckmarkCircle } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
-import {
-  Code2,
-  Globe,
-  CheckSquare,
-  ArrowRight,
-} from "lucide-react";
+import { Code2, Globe, CheckSquare, ArrowRight } from "lucide-react";
 
 const Dashboard = () => {
   // =========================
@@ -36,13 +31,9 @@ const Dashboard = () => {
   // Task Stats
   // =========================
 
-  const completedTasks = tasks.filter(
-    (task) => task.completed
-  ).length;
+  const completedTasks = tasks.filter((task) => task.completed).length;
 
-  const pendingTasks = tasks.filter(
-    (task) => !task.completed
-  ).length;
+  const pendingTasks = tasks.filter((task) => !task.completed).length;
 
   // =========================
   // Stats Cards
@@ -60,9 +51,7 @@ const Dashboard = () => {
       title: "Tasks Done",
       value: completedTasks,
       subtitle: "Completed tasks",
-      icon: (
-        <IoCheckmarkCircle className="text-green-500 text-2xl" />
-      ),
+      icon: <IoCheckmarkCircle className="text-green-500 text-2xl" />,
       iconBg: "bg-green-100",
     },
     {
@@ -91,14 +80,11 @@ const Dashboard = () => {
   // Upcoming Tasks
   // =========================
 
-  const upcomingTasks = tasks
-    .filter((task) => !task.completed)
-    .slice(0, 3);
+  const upcomingTasks = tasks.filter((task) => !task.completed).slice(0, 3);
 
   return (
     <div className="h-full overflow-hidden bg-gray-100">
       <div className="h-full overflow-hidden p-4">
-
         {/* Greeting */}
         <div className="mb-4">
           <span className="text-2xl font-bold select-none">
@@ -132,30 +118,21 @@ const Dashboard = () => {
         ========================= */}
 
         <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-2">
-
           {/* =========================
               Recent Projects
           ========================= */}
 
           <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
-
             <h2 className="text-base font-semibold text-slate-900">
               Recent Projects
             </h2>
 
             <div className="mt-4 space-y-4">
-
               {recentProjects.length === 0 ? (
-                <p className="py-4 text-sm text-slate-400">
-                  No projects yet.
-                </p>
+                <p className="py-4 text-sm text-slate-400">No projects yet.</p>
               ) : (
                 recentProjects.map((project) => (
-                  <div
-                    key={project.id}
-                    className="flex items-center gap-4"
-                  >
-
+                  <div key={project.id} className="flex items-center gap-4">
                     {/* Icon */}
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-500 text-white">
                       <Code2 size={20} />
@@ -163,27 +140,22 @@ const Dashboard = () => {
 
                     {/* Project Info */}
                     <div className="min-w-0 flex-1">
-
                       <h3 className="truncate text-sm font-semibold text-slate-900">
                         {project.name}
                       </h3>
 
                       <p className="mt-1 truncate text-sm text-slate-500">
-                        {project.description ||
-                          "No description provided."}
+                        {project.description || "No description provided."}
                       </p>
-
                     </div>
 
                     {/* Status */}
                     <span className="hidden shrink-0 rounded-full bg-blue-50 px-2.5 py-1 text-xs font-medium text-blue-600 sm:inline-block">
                       {project.status}
                     </span>
-
                   </div>
                 ))
               )}
-
             </div>
 
             {/* View All */}
@@ -194,7 +166,6 @@ const Dashboard = () => {
               View all projects
               <ArrowRight size={16} />
             </Link>
-
           </div>
 
           {/* =========================
@@ -202,35 +173,23 @@ const Dashboard = () => {
           ========================= */}
 
           <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
-
             <h2 className="text-base font-semibold text-slate-900">
               Upcoming Tasks
             </h2>
 
             <div className="mt-4 space-y-4">
-
               {upcomingTasks.length === 0 ? (
-                <p className="py-4 text-sm text-slate-400">
-                  No pending tasks.
-                </p>
+                <p className="py-4 text-sm text-slate-400">No pending tasks.</p>
               ) : (
                 upcomingTasks.map((task) => (
-                  <div
-                    key={task.id}
-                    className="flex items-center gap-4"
-                  >
-
+                  <div key={task.id} className="flex items-center gap-4">
                     {/* Task Icon */}
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-50">
-                      <CheckSquare
-                        size={20}
-                        className="text-blue-500"
-                      />
+                      <CheckSquare size={20} className="text-blue-500" />
                     </div>
 
                     {/* Task Info */}
                     <div className="min-w-0 flex-1">
-
                       <h3 className="truncate text-sm font-semibold text-slate-900">
                         {task.title}
                       </h3>
@@ -238,7 +197,6 @@ const Dashboard = () => {
                       <p className="mt-1 text-sm text-slate-500">
                         Due: {task.due}
                       </p>
-
                     </div>
 
                     {/* Priority */}
@@ -253,11 +211,9 @@ const Dashboard = () => {
                     >
                       {task.priority}
                     </span>
-
                   </div>
                 ))
               )}
-
             </div>
 
             {/* View All */}
@@ -268,11 +224,8 @@ const Dashboard = () => {
               View all tasks
               <ArrowRight size={16} />
             </Link>
-
           </div>
-
         </div>
-
       </div>
     </div>
   );
