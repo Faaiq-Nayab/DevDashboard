@@ -84,7 +84,7 @@ const Dashboard = () => {
 
   return (
     <div className="h-full overflow-hidden bg-gray-100">
-      <div className="h-full overflow-hidden p-4">
+      <div className="h-full overflow-hidden p-2">
         {/* Greeting */}
         <div className="mb-4">
           <span className="text-2xl font-bold select-none">
@@ -92,7 +92,7 @@ const Dashboard = () => {
           </span>
 
           <span className="block pt-1 text-sm text-gray-500 select-none">
-            Here's what's happening with your projects today.
+            Here's what's happening with your work today.
           </span>
         </div>
 
