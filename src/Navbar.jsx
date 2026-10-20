@@ -1,11 +1,12 @@
-import React from 'react'
+import React from "react";
+import { useState } from "react";
 import Searchbar from "./components/Searchbar";
 import { Menu, X } from "lucide-react";
 import { FaBell } from "react-icons/fa6";
 import { useLocation } from "react-router-dom";
-
 const Navbar = ({ mobileMenuIsOpen, setMobileMenuIsOpen }) => {
-   const location = useLocation();
+  const [showNotification, setShowNotification] = useState(false);
+  const location = useLocation();
   const pageNames = {
     "/": "Overview",
     "/projects": "Projects",
@@ -15,7 +16,7 @@ const Navbar = ({ mobileMenuIsOpen, setMobileMenuIsOpen }) => {
     "/settings": "Settings",
   };
   const pageName = pageNames[location.pathname] || "Overview";
-  
+
   return (
     <div className="sticky top-0 z-50">
       <header className="w-full h-15 bg-white/90 backdrop-blur-sm shadow-md px-4 mx-[1px] md:px-8 flex items-center justify-between border-b border-slate-200">
@@ -42,17 +43,21 @@ const Navbar = ({ mobileMenuIsOpen, setMobileMenuIsOpen }) => {
           <button className="relative">
             <FaBell
               size={22}
+              onClick={() => setShowNotification(!showNotification)}
               className="text-gray-500 hover:text-black cursor-pointer transition"
             />
-
-            <span className="absolute -top-2 -right-2 h-5 w-5 rounded-full bg-red-500 text-white text-xs flex items-center justify-center select-none">
-              3
-            </span>
           </button>
+          {showNotification && (
+            <div className="absolute right-0 top-12 w-64 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+              <div className="p-4">
+                <p className="text-gray-700 text-sm">No new notifications.</p>
+              </div>
+            </div>
+          )}
         </div>
       </header>
     </div>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
